@@ -1,7 +1,17 @@
 const db = require("../util/database");
 
 module.exports = class ApiJobs {
-  constructor(id, title, description, locations, site, date, company, salary) {
+  constructor(
+    id,
+    title,
+    description,
+    locations,
+    site,
+    date,
+    company,
+    salary,
+    category_name
+  ) {
     this.id = id;
     this.title = title;
     this.description = description;
@@ -10,6 +20,8 @@ module.exports = class ApiJobs {
     this.date = date;
     this.company = company;
     this.salary = salary;
+    this.category_name = category_name;
+    this.category_id = category_id;
   }
 
   static fetchAll() {
@@ -36,8 +48,8 @@ module.exports = class ApiJobs {
 
   static post(params) {
     const sql = `
-            INSERT INTO api_jobs (title, description, locations, site, date, company, salary, url) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO api_jobs (title, description, locations, site, date, company, salary, url, category_name,category_id) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)
             ON DUPLICATE KEY UPDATE 
                 title = VALUES(title), 
                 description = VALUES(description), 
@@ -45,7 +57,11 @@ module.exports = class ApiJobs {
                 site = VALUES(site), 
                 date = VALUES(date), 
                 company = VALUES(company), 
-                salary = VALUES(salary);
+                salary = VALUES(salary),
+                url = VALUES(url),
+                category_name= VALUES(category_name),
+                category_id = VALUES(category_id);
+
         `;
 
     return db.query(sql, [
@@ -57,6 +73,8 @@ module.exports = class ApiJobs {
       params.company,
       params.salary,
       params.url,
+      params.category_name,
+      params.category_id,
     ]);
     //TODO: Run the query below in the DB
     // ALTER TABLE `api_jobs`
