@@ -184,6 +184,10 @@ cron.schedule("*/10 * * * *", () => {
   console.log("Running cron job");
   australiaJobs();
 });
+// cron.schedule("* * * * *", () => {
+//   console.log("Running cron job");
+//   australiaJobs();
+// });
 cron.schedule("5-59/10 * * * *", () => {
   console.log("Running New Zealand jobs");
   newzealandJobs();
