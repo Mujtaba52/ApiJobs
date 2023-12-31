@@ -1,4 +1,5 @@
 const Job = require('../models/jobs')
+const ApiJobs = require("../models/apiJobs");
 
 exports.getAllJobs = async (req, res, next) => {
     try {
@@ -147,6 +148,19 @@ exports.getJobsByProviderFeatured = async (req, res, next) => {
 exports.createJob = async (req, res, next) => {
     try {
         const [job] = await Job.post(req.body)
+        const apiJobsBody = { 
+            title: req.body.title,
+            description: req.body.description,
+            locations: req.body.city, 
+            site: req.body.link, 
+            date: req.body.date,
+            company: req.body.company_name,
+            salary: req.body.salary,
+            url: req.body.link,
+            category_name: req.body.category, 
+            category_id: req.body.category,
+          }
+        await ApiJobs.post(apiJobsBody);
         res.status(200).json({ "responseCode": 200, "message": "Job created successfully", data: job});
     } catch (error) {
         if (!error.statusCode){
