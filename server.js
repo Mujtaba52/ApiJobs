@@ -44,6 +44,7 @@ const apiJobsRouter = require("./routes/apiJobs");
 const jobBanksRouter = require("./routes/jobBanks");
 const adsRouter = require("./routes/ads");
 const { template } = require("./util/template");
+const { confirmationTemplate } = require("./util/confirmationTemplate");
 const { australiaJobs } = require("./controllers/apiJobs");
 
 const app = express();
@@ -87,7 +88,9 @@ app.post("/api/distribute", async (req, res) => {
   // const name = req.body.name
   // const address = req.body.address
   // const phone = req.body.phone
-  // const email = req.body.email
+  const email = req.body.email
+  console.log("req.body.name: ====>" + req.body.name)
+  const name = req.body.name;
   // const role = req.body.role
   // const intro = req.body.intro
   // const skills = req.body.skills
@@ -107,10 +110,18 @@ app.post("/api/distribute", async (req, res) => {
   });
   message = {
     from: "seek@jobss.com.au",
-    to: "tayyabrana5999@gmail.com, bimalntb@gmail.com, abubakar.4983763@gmail.com",
+    to: "info@jobss.com.au, seek@jobss.com.au, mediabrandings@gmail.com, melbournebusinesspage@gmail.com, ceo@jobss.com.au, sales@jobss.com.au, business@jobss.com.au",
     subject: req.body.role + " Available!",
     text: "A Skilled React Native Developer is looking for a vacancy, Take a look at Resume shared by him/her",
     html: template(req.body),
+  };
+
+  confirmationMessage = {
+    from: "seek@jobss.com.au",
+    to: req.body.email,
+    subject: "Resume Distribution Confirmation",
+    text: ``,
+    html: confirmationTemplate({name}),
   };
 
   transporter.sendMail(message, function (err, info) {
@@ -123,6 +134,18 @@ app.post("/api/distribute", async (req, res) => {
       });
     }
   });
+
+
+transporter.sendMail(confirmationMessage, function (err, info) {
+  if (err) {
+    res.status(200).json({ responseCode: 205, message: "Resume Failed...." });
+  } else {
+    res.status(200).json({
+      responseCode: 200,
+      message: "Resume Distributed successfully",
+    });
+  }
+});
 });
 
 app.use(
