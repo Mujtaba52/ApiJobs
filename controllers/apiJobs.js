@@ -95,18 +95,21 @@ exports.addApiJobs = async (req, res, next) => {
 //98 analyst
 const categoryIdMapping = {
   Other: 128,
-  "Accounting and Finance": 124,
-  "Software Engineer": 123,
-  Management: 109,
-  Consultancy: 106,
+  "Accounting": 124,
+  "Technology": 123,
+  "Agro and farming": 109,
+  Fashion: 106,
   Education: 104,
   HealthCare: 103,
-  "Hospitality & Tourism": 99,
-  Analyst: 98,
+  "Hospitality": 99,
+  "Sales and marketing": 98,
+  Construction:131,
+  Telecom:130,
+  Automotive:129,
 };
 
 const categoryMapping = {
-  "Software Engineer": [
+  "Technology": [
     "developer",
     "devops",
     "programmer",
@@ -114,8 +117,8 @@ const categoryMapping = {
     "frontend",
     "full stack",
   ],
-  Management: [
-    "leader",
+  "Agro and farming": [
+    "Marketing",
     "supervisor",
     "manager",
     "leadership",
@@ -123,9 +126,8 @@ const categoryMapping = {
     "executive",
     "director",
     "head of",
-    "chief",
   ],
-  Consultancy: ["consultant", "adviser", "strategy consultant"],
+  Fashion: ["Fashion", "model"],
   Education: ["education", "teacher", "student", "educator", "lecturer"],
   HealthCare: [
     "nurse",
@@ -143,13 +145,16 @@ const categoryMapping = {
     "dental",
     "pharmacist",
   ],
-  Analyst: ["data analyst", "analyst"],
+  "Sales and marketing": ["Sale", "Sales"],
   // Chef: ["chef"],
   // Driver: ["driver", "delivery", "picker"],
   // "Sales and Marketing": ["sales", "marketing"],
-  "Accounting and Finance": ["Accountant", "Accounting"],
-  "Hospitality & Tourism": ["Hospitality", "Tourism"],
+  "Accounting": ["Accountant", "Accounting"],
+  "Hospitality": ["Hospitality", "Tourism"],
   // "Call Center & Customer Service": ["Call", "Customer"],
+  "Construction": ["Construction"],
+  "Telecom": ["Telecom"],
+  Automotive:["Automotive","driver","delivery","picker","mechanic","car","carrier","vehicle"]
 };
 
 // Function to determine the category of a job
