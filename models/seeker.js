@@ -34,6 +34,10 @@ module.exports = class Seeker {
         return db.query('INSERT INTO `seekers` (`name`, `username`, `email`, `password`, `phone`, `address`, `dob`, `gender`, `type`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [params.name, params.username, params.email, params.password, params.phone, params.address, params.dob, params.gender, params.type])
     }
 
+    static updateStatus(params){
+        return db.query('UPDATE `seekers` SET  activated = true WHERE email = ?', [params.email])
+    }
+
     static edit(params){
         return db.query('UPDATE `seekers` SET `name` = ?, `city` = ?, `country` = ?, `username` = ?, `code` = ?, `phone` = ?, `address` = ?, `dob` = ?, `gender` = ? WHERE (`id` = ?)', [params.name, params.city, params.country, params.username, params.code, params.phone, params.address, params.dob, params.gender, params.id])
     }
