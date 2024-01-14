@@ -14,5 +14,6 @@ router.put('/api/seekers/role', seekersController.roleSeeker);
 router.put('/api/seekers/update', seekersController.updateSeeker);
 router.put('/api/seekers/verify', seekersController.verifySeeker);
 router.delete('/api/seekers/delete', seekersController.deleteSeeker);
+router.post('/api/seekers/updateStatus', seekersController.createSeeker);
 
 module.exports = router;
